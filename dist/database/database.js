@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.purchasesTable = exports.usersTable = exports.productsTable = exports.supabase = void 0;
+const supabase_js_1 = require("@supabase/supabase-js");
+const SUPABASE_URL = process.env.SUPABASE_URL || "https://oplphypzdowhyequjmkk.supabase.co";
+const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9wbHBoeXB6ZG93aHllcXVqbWtrIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzM0NTgzMTUsImV4cCI6MTk4OTAzNDMxNX0.qrjEf_4MQbLB_YlZAJ54hv841cYb5y8AjPmptQVHBd8";
+exports.supabase = (0, supabase_js_1.createClient)(SUPABASE_URL, SUPABASE_API_KEY);
+exports.productsTable = exports.supabase.from('products');
+exports.usersTable = exports.supabase.from('users');
+exports.purchasesTable = exports.supabase.from('purchases');
