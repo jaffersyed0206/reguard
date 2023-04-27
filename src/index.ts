@@ -10,6 +10,8 @@ import claimsRouter from './claims/api';
 import REGUARD_DB from './database/database';
 import customerRouters from './customers/api';
 import purchasesRouter from './purchases/api';
+import { getAllClaims } from './claims/functions';
+import { getAllPurchases } from './purchases/functions';
 
 Promise.all([
     REGUARD_DB.sync({alter: true}),
@@ -27,6 +29,23 @@ Promise.all([
     app.use("/claims", claimsRouter)
     app.use("/customers", customerRouters)
     app.use("/purchases", purchasesRouter)
+
+    app.get("/data", async(req: Request, res: Response) => {
+        const claims = await getAllClaims()
+        const purchases = await getAllPurchases()
+        const customers = await getAllPurchases()
+        res.json({
+            claims: {
+                count: claims.length
+            },
+            purchases: {
+                count: purchases.length
+            },
+            customers: {
+                count: customers.length
+            }
+        })
+    })
 
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
